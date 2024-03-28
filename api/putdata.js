@@ -10,6 +10,7 @@ const HOST = process.env.DB_HOST
 const USER = process.env.DB_USER
 const PASSWORD = process.env.DB_PASSWORD
 const DATABASE = process.env.DB_NAME
+const TABLE = process.env.DB_TABLE
 
 const connection = mysql.createConnection({
   host: HOST,
@@ -26,7 +27,7 @@ connection.connect((err) =>{
 });
 
 app.get("/users", cors(), (req, res) => {
-  const sql = "SELECT * FROM webapp.crud";
+  const sql = TABLE;
   connection.query(sql, function (err, results, fields) {
     console.log(results); // results contains rows returned by server
     res.send(results)
