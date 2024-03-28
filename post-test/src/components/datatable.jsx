@@ -13,15 +13,15 @@ function Datatable() {
     const callApi = async () => {
         const res = await axios.get("http://localhost:3004/users");
         const data_format = await res.data
-    
-        data_format.map((item) => {
-          setData((prev) => [...prev, item]);
-        })
-      };
 
-      useEffect(() => {
+        data_format.map((item) => {
+            setData((prev) => [...prev, item]);
+        })
+    };
+
+    useEffect(() => {
         callApi();
-      }, []);
+    }, []);
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
@@ -45,7 +45,7 @@ function Datatable() {
 
 
     return (
-        <>
+        <div>
             <div style={{ height: 400, width: '100%' }}>
                 <DataGrid
                     rows={data}
@@ -58,8 +58,10 @@ function Datatable() {
                     pageSizeOptions={[5, 10]}
                     checkboxSelection
                 />
+
+
             </div>
-        </>
+        </div>
     );
 }
 

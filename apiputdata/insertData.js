@@ -15,6 +15,7 @@ const USER = process.env.DB_USER;
 const PASSWORD = process.env.DB_PASSWORD;
 const DATABASE = process.env.DB_NAME;
 const TABLE = process.env.DB_TABLE;
+const REQ_BODY = process.env.REQ_BODY;
 
 const connection = mysql.createConnection({
   host: HOST,
