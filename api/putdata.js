@@ -10,6 +10,13 @@ const connection = mysql.createConnection({
   database: "mydb",
   password: "root",
 });
+connection.connect((err) =>{
+  if(!connection){
+    console.log({msg : "Connected failed", err});
+  } else {
+    console.log({msg : "Connected"});
+  }
+})
 
 app.get("/users", cors(), (req, res) => {
   const sql = "SELECT * FROM webapp.crud";
