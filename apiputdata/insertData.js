@@ -31,8 +31,7 @@ connection.connect((err) => {
 });
 
 app.post("/inserts", jsonParser, (req, res) => {
-  const sql =
-    "INSERT INTO `webapp`.`crud` (`username`, `email`) VALUES (?, ?);";
+  const sql = TABLE
 
   // Get the request body
   const reqBody = {
