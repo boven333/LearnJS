@@ -30,6 +30,7 @@ function Datatable() {
         {
             field: 'date',
             headerName: 'Date',
+            type : "number",
             width: 300,
         },
         // {
@@ -58,8 +59,6 @@ function Datatable() {
                     pageSizeOptions={[5, 10]}
                     checkboxSelection
                 />
-
-
             </div>
         </div>
     );

@@ -15,7 +15,6 @@ const USER = process.env.DB_USER;
 const PASSWORD = process.env.DB_PASSWORD;
 const DATABASE = process.env.DB_NAME;
 const TABLE = process.env.DB_TABLE;
-const REQ_BODY = process.env.REQ_BODY;
 
 const connection = mysql.createConnection({
   host: HOST,
@@ -40,13 +39,11 @@ app.post("/inserts", jsonParser, (req, res) => {
     email: req.body.email,
   };
 
-  connection.query(sql, [reqBody.username, reqBody.email], (err, results) => {
+  connection.execute(sql, [reqBody.username, reqBody.email], (err, results) => {
     if (err) {
-      // หากเกิดข้อผิดพลาดในการเพิ่มข้อมูล
       console.error("Error inserting user:", err);
       res.status(500).json({ error: "Failed to insert user" });
     } else {
-      // หากเพิ่มข้อมูลผู้ใช้สำเร็จ
       res.status(201).json({ message: "User added successfully" });
     }
   });
@@ -57,5 +54,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
+  console.log(`Running port ${PORT}`);
 });

@@ -28,8 +28,12 @@ connection.connect((err) =>{
 app.get("/users", cors(), (req, res) => {
   const sql = TABLE;
   connection.execute(sql, function (err, results, fields) {
-    console.log(results); // results contains rows returned by server
-    res.send(results)
+    if (err) {
+      console.error("Error getting user:", err);
+      res.status(500).json({ error: "Failed to getting user" });
+    } else {
+      res.status(201).json({ message: "Get Users successfully" });
+    }
   }, []);
 });
 
