@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-const port = 3004;
 const mysql = require("mysql2");
 const app = express(); //app server
 
@@ -28,7 +27,7 @@ connection.connect((err) =>{
 
 app.get("/users", cors(), (req, res) => {
   const sql = TABLE;
-  connection.query(sql, function (err, results, fields) {
+  connection.execute(sql, function (err, results, fields) {
     console.log(results); // results contains rows returned by server
     res.send(results)
   }, []);
