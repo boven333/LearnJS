@@ -53,12 +53,9 @@ app.post("/insert", jsonParser, (req, res) => {
   const sql = INSERT_TABLE
 
   // Get the request body
-  const reqBody = {
-    username: req.body.username,
-    email: req.body.email,
-  };
+  const values = [ req.body.username, req.body.email,];
 
-  connection.execute(sql, [reqBody.username, reqBody.email], (err, results) => {
+  connection.execute(sql, values, (err, results) => {
     if (err) {
       console.error("Error inserting user:", err);
       res.status(500).json({ error: "Failed to insert user" });
@@ -73,13 +70,9 @@ app.post("/insert", jsonParser, (req, res) => {
 app.put("/update", (req, res) => {
   const sql = UPDATE_TABLE 
   // Get the request body
-  const reqBody = {
-    id: req.body.id,
-    username: req.body.username,
-    email: req.body.email,
-  };
+  const values = [ req.body.username,req.body.email,req.body.id];
 
-  connection.execute(sql, [reqBody.id, reqBody.username, reqBody.email], (err, results) => {
+  connection.query(sql, values, (err, results) => {
     if (err) {
       console.error("Error updating user:", err);
       res.status(500).json({ error: "Failed to update user" });

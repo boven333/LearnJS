@@ -1,5 +1,5 @@
 
-var array = [1, 2, 3, 3, 4, 5, 6, 6, 7, 7, 8, 9, 9];
+const array = [1, 2, 3, 3, 4, 5, 6, 6, 7, 7, 8, 9, 9];
 
 let maxArr = Math.max(...array);
 console.log("This is Max Array :", maxArr);
@@ -56,9 +56,22 @@ const countArray = (arr) => {
         if (unique.indexOf(arr[i]) === -1) {
             unique.push(arr[i]);
         }
-    }
-    
+    };
+
     return unique;
 }
 
-console.log(remove("Array : ", array));
+console.log(remove(array));
+
+
+
+const OnlyArray=(inputArray)=>{
+  console.log(inputArray);
+  const setArray = inputArray.filter((item, index) =>  {
+    console.log(item, inputArray.indexOf(item), index);
+    return inputArray.indexOf(item) !== index});
+  
+    return Array.from(new Set(setArray));
+}
+
+console.log(OnlyArray(array));
