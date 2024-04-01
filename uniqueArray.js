@@ -2,17 +2,17 @@
 const array = [1, 2, 3, 3, 4, 5, 6, 6, 7, 7, 8, 9, 9];
 
 let maxArr = Math.max(...array);
-console.log("This is Max Array :", maxArr);
+// console.log("This is Max Array :", maxArr);
 
 let minArr = Math.min(...array);
-console.log("This is Min Array :", minArr);
+// console.log("This is Min Array :", minArr);
 
 var summ = 0;
 for (let i of array) {
     summ += i;
 };
 arg = summ / array.length;
-console.log("This is an Average of Array :", arg);
+// console.log("This is an Average of Array :", arg);
 
 
 // The magical counting process
@@ -38,14 +38,14 @@ const countArray = (arr) => {
   };
 
   const results = countArray(array);
-  console.log("Counts Array : ", results);
+  // console.log("Counts Array : ", results);
 
 
   const count = {};
   array.forEach((x) => {
     count[x] = (count[x] || 0) + 1;
   });
-  console.log(count)
+  // console.log(count)
 
 
 
@@ -61,7 +61,7 @@ const countArray = (arr) => {
     return unique;
 }
 
-console.log(remove(array));
+// console.log(remove(array));
 
 
 
@@ -74,4 +74,22 @@ const OnlyArray=(inputArray)=>{
     return Array.from(new Set(setArray));
 }
 
-console.log(OnlyArray(array));
+// console.log(OnlyArray(array));
+
+const number = [1, 2, 3, 4, 5, 6, 7, '8'];
+
+number.sort();
+console.log(number);
+
+var reverse = number.reverse();
+console.log(reverse);
+
+var mapNum = number.map(Number);
+console.log(mapNum);
+
+var sorted = mapNum.sort();
+console.log(sorted);
+
+var sortedReverse = mapNum.reverse();
+console.log(sortedReverse);
+

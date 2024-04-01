@@ -30,7 +30,7 @@ function Datatable() {
         {
             field: 'date',
             headerName: 'Date',
-            type : "number",
+            type : "time",
             width: 300,
         },
         // {

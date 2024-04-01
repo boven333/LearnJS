@@ -5,6 +5,7 @@ const app = express(); //app server
 const bodyParser = require("body-parser");
 
 app.use(bodyParser.json());
+app.use(cors());
 var jsonParser = bodyParser.json();
 
 require('dotenv').config();
@@ -17,6 +18,7 @@ const DELETE_TABLE = process.env.DB_DELETE_TABLE
 const INSERT_TABLE = process.env.DB_INSERT_TABLE
 const SELECT_TABLE = process.env.DB_GET_TABLE
 const UPDATE_TABLE = process.env.DB_UPDATE_TABLE
+const GET_ID_TABLE = process.env.DB_GETID_TABLE
 
 const connection = mysql.createConnection({
   host: HOST,
@@ -33,20 +35,33 @@ connection.connect((err) =>{
 });
 
 // Get all users
-app.get("/users", cors(), (req, res) => {
+app.get("/users", cors(), jsonParser, (req, res) => {
   const sql = SELECT_TABLE;
   connection.execute(sql, function (err, results, fields) {
     if (err) {
       console.error("Error getting user:", err);
       res.status(500).json({ error: "Failed to getting user" });
     } else {
-      res.status(201).json({ message: "Get Users successfully" });
+      res.status(201).json(results);
     }
   }, []);
 });
-
 // ------------------------------------------------------------------------------
 
+// get by;id
+app.get("/users/:id", cors(), jsonParser, (req, res) => {
+  const sql = GET_ID_TABLE
+  const id = req.params.id;
+  connection.execute(sql, [id], (err, results, fields) => {
+    if (err) {
+      console.error("Error getting user:", err);
+      res.status(500).json({ error: "Failed to getting user" });
+    } else {
+      res.status(201).json(results);
+    }
+  }, []);
+});
+// ------------------------------
 
 // Insert table;
 app.post("/insert", jsonParser, (req, res) => {
@@ -67,7 +82,7 @@ app.post("/insert", jsonParser, (req, res) => {
 // ------------------------------------------------------------------------------
 
 // Updata table
-app.put("/update", (req, res) => {
+app.put("/update", jsonParser, (req, res) => {
   const sql = UPDATE_TABLE 
   // Get the request body
   const values = [ req.body.username,req.body.email,req.body.id];
