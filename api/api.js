@@ -16,6 +16,7 @@ const DATABASE = process.env.DB_NAME
 const DELETE_TABLE = process.env.DB_DELETE_TABLE
 const INSERT_TABLE = process.env.DB_INSERT_TABLE
 const SELECT_TABLE = process.env.DB_GET_TABLE
+const UPDATE_TABLE = process.env.DB_UPDATE_TABLE
 
 const connection = mysql.createConnection({
   host: HOST,
@@ -33,7 +34,7 @@ connection.connect((err) =>{
 
 // Get all users
 app.get("/users", cors(), (req, res) => {
-  const sql = DB_GET_TABLE;
+  const sql = SELECT_TABLE;
   connection.execute(sql, function (err, results, fields) {
     if (err) {
       console.error("Error getting user:", err);
@@ -69,19 +70,23 @@ app.post("/insert", jsonParser, (req, res) => {
 // ------------------------------------------------------------------------------
 
 // Updata table
-app.delete("/delete", jsonParser, (req, res) => {
-  const sql = DELETE_TABLE 
+app.put("/update", (req, res) => {
+  const sql = UPDATE_TABLE 
   // Get the request body
   const reqBody = {
-    id: req.body.id
+    id: req.body.id,
+    username: req.body.username,
+    email: req.body.email,
   };
 
-  connection.execute(sql, [reqBody.id], (err, results) => {
+  connection.execute(sql, [reqBody.id, reqBody.username, reqBody.email], (err, results) => {
     if (err) {
-      console.error("Error deleting user:", err);
-      res.status(500).json({ error: "Failed to delete user" });
+      console.error("Error updating user:", err);
+      res.status(500).json({ error: "Failed to update user" });
+    
     } else {
-      res.status(201).json({ message: "User has Deleted!" });
+      res.status(201).json({ message: "User has Update!" });
+        console.log(results);
     }
   });
 });

@@ -1,5 +1,5 @@
 
-var array = [1, 3, 3, 4, 7, 2, 5, 7, 9, 8, 6, 6];
+var array = [1, 2, 3, 3, 4, 5, 6, 6, 7, 7, 8, 9, 9];
 
 let maxArr = Math.max(...array);
 console.log("This is Max Array :", maxArr);
@@ -19,7 +19,7 @@ console.log("This is an Average of Array :", arg);
 const countArray = (arr) => {
     // Let's use a JavaScript object to keep track of counts
     const counts = { 
-        '3' : 2
+   
     };
   
     // Loop through each element in the array
@@ -46,3 +46,19 @@ const countArray = (arr) => {
     count[x] = (count[x] || 0) + 1;
   });
   console.log(count)
+
+
+
+  function remove(arr) {
+    let unique = [];
+
+    for (i = 0; i < arr.length; i++) {
+        if (unique.indexOf(arr[i]) === -1) {
+            unique.push(arr[i]);
+        }
+    }
+    
+    return unique;
+}
+
+console.log(remove("Array : ", array));
